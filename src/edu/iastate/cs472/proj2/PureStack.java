@@ -1,4 +1,4 @@
-package stacks;
+package edu.iastate.cs472.proj2;
 
 /**
  * Interface for basic stack operations.

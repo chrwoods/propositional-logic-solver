@@ -1,4 +1,4 @@
-package stacks;
+package edu.iastate.cs472.proj2;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;

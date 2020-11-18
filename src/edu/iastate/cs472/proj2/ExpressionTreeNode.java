@@ -62,4 +62,17 @@ public class ExpressionTreeNode {
     public static boolean isOperand(ExpressionType type) {
         return type == ExpressionType.SYMBOL || type == ExpressionType.TRUE || type == ExpressionType.FALSE;
     }
+
+    public static int numChildren(ExpressionType type) {
+        switch (type) {
+            case NOT:
+                return 1;
+            case AND:
+            case OR:
+            case IF:
+            case IFF:
+                return 2;
+        }
+        return 0;
+    }
 }

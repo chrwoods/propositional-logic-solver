@@ -20,6 +20,7 @@ public class Parser {
 
         while (matcher.find()) {
             String token = matcher.group();
+            System.out.print(">" + token);
             ExpressionType type = getType(token);
             ExpressionTreeNode node = new ExpressionTreeNode(type);
 
@@ -31,6 +32,7 @@ public class Parser {
                     ExpressionTreeNode popped = operatorStack.pop();
                     while (popped.type != ExpressionType.LEFTP) {
                         fullStack.push(popped);
+                        popped = operatorStack.pop();
                     }
                 } else if (type == ExpressionType.LEFTP) {
                     operatorStack.push(node);
@@ -45,7 +47,6 @@ public class Parser {
                     }
                     operatorStack.push(node);
                 }
-                operatorStack.push(node);
             }
         }
 
@@ -53,6 +54,22 @@ public class Parser {
             fullStack.push(operatorStack.pop());
         }
 
-        return null;
+        return makeTree(fullStack);
+    }
+
+    private ExpressionTreeNode makeTree(PureStack<ExpressionTreeNode> stack) {
+        if (stack.isEmpty()) return null;
+
+        ExpressionTreeNode node = stack.pop();
+        int children = numChildren(node.type);
+        if (children == 0) return node;
+        if (children == 2) {
+            node.right = makeTree(stack);
+        }
+        if (children > 0) {
+            node.left = makeTree(stack);
+        }
+
+        return node;
     }
 }

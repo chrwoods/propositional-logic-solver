@@ -16,7 +16,7 @@ public class CNFConverter {
      *
      * @param tree
      */
-    private void removeIfs(ExpressionTreeNode tree) {
+    private static void removeIfs(ExpressionTreeNode tree) {
         if (tree == null) return;
 
         if (tree.type == ExpressionType.IF) {
@@ -50,7 +50,7 @@ public class CNFConverter {
      * @param tree
      * @return
      */
-    private ExpressionTreeNode moveNots(ExpressionTreeNode tree) {
+    private static ExpressionTreeNode moveNots(ExpressionTreeNode tree) {
         if (tree == null) return null;
 
         if (tree.type == ExpressionType.NOT) {
@@ -86,7 +86,7 @@ public class CNFConverter {
      * @param tree
      * @return
      */
-    private ConjunctiveNormalForm makeCNF(ExpressionTreeNode tree) {
+    private static ConjunctiveNormalForm makeCNF(ExpressionTreeNode tree) {
         ConjunctiveNormalForm cnf = new ConjunctiveNormalForm();
 
         // this new tree should have only ANDs, ORs, and symbols.
@@ -127,7 +127,7 @@ public class CNFConverter {
      * @param tree
      * @return
      */
-    public ConjunctiveNormalForm convert(ExpressionTreeNode tree) {
+    public static ConjunctiveNormalForm convert(ExpressionTreeNode tree) {
         // remove extraneous symbols
         removeIfs(tree);
         tree = moveNots(tree);

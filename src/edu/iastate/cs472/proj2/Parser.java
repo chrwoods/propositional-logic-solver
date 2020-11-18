@@ -22,7 +22,7 @@ public class Parser {
      * @param sentence
      * @return
      */
-    public ExpressionTreeNode parse(String sentence) {
+    public static ExpressionTreeNode parse(String sentence) {
         Pattern pattern = Pattern.compile(tokenRegex);
         Matcher matcher = pattern.matcher(sentence);
 
@@ -74,7 +74,7 @@ public class Parser {
      * @param stack
      * @return
      */
-    private ExpressionTreeNode makeTree(PureStack<ExpressionTreeNode> stack) {
+    private static ExpressionTreeNode makeTree(PureStack<ExpressionTreeNode> stack) {
         if (stack.isEmpty()) return null;
 
         ExpressionTreeNode node = stack.pop();

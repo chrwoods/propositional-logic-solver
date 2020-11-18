@@ -22,6 +22,8 @@ public class Clause {
 
     @Override
     public String toString() {
+        if (literals.isEmpty()) return "empty clause";
+
         Iterator<Literal> iterator = literals.iterator();
         StringBuilder ret = new StringBuilder();
 

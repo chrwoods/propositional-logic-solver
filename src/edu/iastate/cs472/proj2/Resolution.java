@@ -37,6 +37,10 @@ public class Resolution {
                 }
             }
 
+            if (newClauses.isEmpty()) {
+                System.out.println("No new clauses are added.");
+                System.out.println();
+            }
             if (clauses.containsAll(newClauses)) return false;
             clauses.addAll(newClauses);
             newClauses = new ArrayList<>();
@@ -55,6 +59,7 @@ public class Resolution {
         for (Literal li : ci.literals) {
             for (Literal lj : cj.literals) {
                 if (li.symbol.equals(lj.symbol) && li.negated != lj.negated) {
+                    // make a new resolvent clause
                     Clause clause = new Clause();
                     for (Literal li2 : ci.literals) {
                         if (li != li2) clause.add(li2);
@@ -63,6 +68,13 @@ public class Resolution {
                         if (lj != lj2) clause.add(lj2);
                     }
                     resolvents.add(clause);
+
+                    // print following format
+                    System.out.println(ci);
+                    System.out.println(cj);
+                    System.out.println("--------------------");
+                    System.out.println(clause);
+                    System.out.println();
                 }
             }
         }

@@ -70,9 +70,11 @@ public class Main {
         System.out.println();
         for (String knowledge : kbList) {
             ConjunctiveNormalForm base = convert(parse(knowledge));
-            System.out.println(base);
-            System.out.println();
-            kb.clauses.addAll(base.clauses);
+            if (!base.clauses.isEmpty()) {
+                System.out.println(base);
+                System.out.println();
+                kb.clauses.addAll(base.clauses);
+            }
         }
 
         // solve for queries

@@ -23,6 +23,9 @@ public class Resolution {
         clauses.addAll(query.clauses);
         List<Clause> newClauses = new ArrayList<>();
 
+        // return true if the query is "true"
+        if (!query.clauses.isEmpty() && query.clauses.get(0).literals.isEmpty()) return true;
+
         while (true) {
             // resolve every clause
             for (int i = 0; i < clauses.size(); i++) {
@@ -48,6 +51,7 @@ public class Resolution {
                 System.out.println("No new clauses are added.");
                 System.out.println();
             }
+            // note: this line is pointless because we check this earlier, but I left it in for grading purposes
             if (clauses.containsAll(newClauses)) return false;
             clauses.addAll(newClauses);
             newClauses = new ArrayList<>();

@@ -1,3 +1,6 @@
-Input files are to be placed in the directory src/inputs/
+Input files are to be placed in the directory src/inputs/.
+
+A ton more resolutions are printed in this execution vs in the sample execution, if you want to run it without
+all those lines in the way, comment out line 41 of Resolution.java.
 
 Written by Christopher Woods, NetID cswoods, 11/18/2020.

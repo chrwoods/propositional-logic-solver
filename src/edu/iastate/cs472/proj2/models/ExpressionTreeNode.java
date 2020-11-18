@@ -1,6 +1,16 @@
 package edu.iastate.cs472.proj2.models;
 
+/**
+ * A node for a Binary Expression Tree that builds a propositional logic statement.
+ *
+ * Note: for unary operators, only the left child is used.
+ *
+ * @author cswoods
+ */
 public class ExpressionTreeNode {
+    /**
+     * Possible expression types.
+     */
     public enum ExpressionType {
         SYMBOL,
         NOT,
@@ -39,6 +49,12 @@ public class ExpressionTreeNode {
         if (node.right != null) clone.right = new ExpressionTreeNode(node.right);
     }
 
+    /**
+     * Gets stack priority for postfix evaluation.
+     *
+     * @param type
+     * @return
+     */
     public static int getPriority(ExpressionType type) {
         switch (type) {
             case NOT:
@@ -57,6 +73,12 @@ public class ExpressionTreeNode {
         return 0;
     }
 
+    /**
+     * Gets type enum from token.
+     *
+     * @param token
+     * @return
+     */
     public static ExpressionType getType(String token) {
         switch (token) {
             case "~":
@@ -81,10 +103,22 @@ public class ExpressionTreeNode {
         return ExpressionType.SYMBOL;
     }
 
+    /**
+     * Returns true if the type is an operand, false if it is an operator.
+     *
+     * @param type
+     * @return
+     */
     public static boolean isOperand(ExpressionType type) {
         return type == ExpressionType.SYMBOL || type == ExpressionType.TRUE || type == ExpressionType.FALSE;
     }
 
+    /**
+     * Gets number of children a node will have for each type.
+     *
+     * @param type
+     * @return
+     */
     public static int numChildren(ExpressionType type) {
         switch (type) {
             case NOT:

@@ -121,6 +121,22 @@ public class CNFConverter {
         return cnf;
     }
 
+    private static void removeTrueFalse(ConjunctiveNormalForm cnf) {
+        for (int i = 0; i < cnf.clauses.size(); i++) {
+            Clause clause = cnf.clauses.get(i);
+            for (int j = 0; j < clause.literals.size(); j++) {
+                Literal literal = clause.literals.get(j);
+                if (literal.symbol.equals("true")) {
+                    // remove this clause because the entire clause is a tautology (A || true = true)
+                    cnf.clauses.remove(i--);
+                    break;
+                } else if (literal.symbol.equals("false")) {
+                    // remove this literal because it's pointless (A || false = A)
+                    clause.literals.remove(j--);
+                }
+            }
+        }
+    }
     /**
      * Converts a given binary expression tree to CNF.
      *
@@ -132,6 +148,10 @@ public class CNFConverter {
         removeIfs(tree);
         tree = moveNots(tree);
 
-        return makeCNF(tree);
+        // make the CNF and remove redundancy
+        ConjunctiveNormalForm cnf = makeCNF(tree);
+        removeTrueFalse(cnf);
+
+        return cnf;
     }
 }

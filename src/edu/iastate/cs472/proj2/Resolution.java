@@ -27,11 +27,18 @@ public class Resolution {
             // resolve every clause
             for (int i = 0; i < clauses.size(); i++) {
                 for (int j = i + 1; j < clauses.size(); j++) {
-                    List<Clause> resolvents = resolve(clauses.get(i), clauses.get(j));
+                    List<String> outputStrings = new ArrayList<>();
+                    List<Clause> resolvents = resolve(clauses.get(i), clauses.get(j), outputStrings);
                     if (!resolvents.isEmpty()) {
-                        for (Clause resolved : resolvents) {
+                        for (int k = 0; k < resolvents.size(); k++) {
+                            Clause resolved = resolvents.get(k);
+
+                            if (!clauses.contains(resolved) && !newClauses.contains(resolved)) {
+                                newClauses.add(resolved);
+                                System.out.println(outputStrings.get(k));
+                            }
+
                             if (resolved.literals.isEmpty()) return true;
-                            newClauses.add(resolved);
                         }
                     }
                 }
@@ -54,7 +61,7 @@ public class Resolution {
      * @param cj
      * @return
      */
-    private static List<Clause> resolve(Clause ci, Clause cj) {
+    private static List<Clause> resolve(Clause ci, Clause cj, List<String> outputStrings) {
         List<Clause> resolvents = new ArrayList<>();
         for (Literal li : ci.literals) {
             for (Literal lj : cj.literals) {
@@ -68,13 +75,7 @@ public class Resolution {
                         if (lj != lj2) clause.add(lj2);
                     }
                     resolvents.add(clause);
-
-                    // print following format
-                    System.out.println(ci);
-                    System.out.println(cj);
-                    System.out.println("--------------------");
-                    System.out.println(clause);
-                    System.out.println();
+                    outputStrings.add(ci + "\n" + cj + "\n--------------------\n" + clause + "\n");
                 }
             }
         }

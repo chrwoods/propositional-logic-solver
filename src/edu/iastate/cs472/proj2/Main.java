@@ -12,6 +12,14 @@ import static edu.iastate.cs472.proj2.Parser.parse;
 import static edu.iastate.cs472.proj2.CNFConverter.convert;
 import static edu.iastate.cs472.proj2.Resolution.resolution;
 
+/**
+ * The whole shebang!
+ *
+ * Takes in a file as input, and based on the given knowledge base and queries, creates binary expression trees,
+ * converts to Conjunctive Normal Form, and performs resolution with each query, showing resolution steps along the way.
+ *
+ * @author cswoods
+ */
 public class Main {
     public static void main(String[] args) throws IOException {
         // prompt user for filename

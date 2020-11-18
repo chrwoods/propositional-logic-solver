@@ -18,4 +18,13 @@ public class Literal {
     public String toString() {
         return (negated ? "~" : "") + symbol;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Literal) {
+            Literal literal = (Literal)o;
+            return this.symbol.equals(literal.symbol) && this.negated == literal.negated;
+        }
+        return false;
+    }
 }

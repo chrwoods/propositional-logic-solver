@@ -31,4 +31,17 @@ public class Clause {
         }
         return ret.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Clause) {
+            Clause clause = (Clause)o;
+            if (clause.literals.size() != literals.size()) return false;
+            for (int i = 0; i < literals.size(); i++) {
+                if (!clause.literals.get(i).equals(literals.get(i))) return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }

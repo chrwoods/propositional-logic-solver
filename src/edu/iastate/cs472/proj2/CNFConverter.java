@@ -107,7 +107,9 @@ public class CNFConverter {
         } else {
             Literal literal;
             if (tree.type == ExpressionType.NOT) {
-                literal = new Literal(tree.left.value, true);
+                if (tree.left.type == ExpressionType.TRUE) literal = new Literal("false", false);
+                else if (tree.left.type == ExpressionType.FALSE) literal = new Literal("true", false);
+                else literal = new Literal(tree.left.value, true);
             } else {
                 literal = new Literal(tree.value, false);
             }
@@ -127,11 +129,8 @@ public class CNFConverter {
      */
     public ConjunctiveNormalForm convert(ExpressionTreeNode tree) {
         // remove extraneous symbols
-        System.out.println(tree);
         removeIfs(tree);
-        System.out.println(tree);
         tree = moveNots(tree);
-        System.out.println(tree);
 
         return makeCNF(tree);
     }

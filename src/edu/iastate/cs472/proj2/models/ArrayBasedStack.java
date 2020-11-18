@@ -1,4 +1,4 @@
-package edu.iastate.cs472.proj2;
+package edu.iastate.cs472.proj2.models;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;

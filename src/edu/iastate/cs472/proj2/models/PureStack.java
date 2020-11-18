@@ -1,4 +1,4 @@
-package edu.iastate.cs472.proj2;
+package edu.iastate.cs472.proj2.models;
 
 /**
  * Interface for basic stack operations.

@@ -1,16 +1,27 @@
 package edu.iastate.cs472.proj2;
 
+import edu.iastate.cs472.proj2.models.*;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static edu.iastate.cs472.proj2.ExpressionTreeNode.*;
+import static edu.iastate.cs472.proj2.models.ExpressionTreeNode.*;
 
 /**
  * @author cswoods
+ *
+ * Parses given propositional logic sentences into binary expression trees.
  */
 public class Parser {
     static final String tokenRegex = "[A-Z][A-Za-z]*|~|\\(|\\)|&&|\\|\\||=>|<=>|true|false";
 
+    /**
+     * Parses a sentence into a tree. This is done by first converting into a postfix stack,
+     * then converting that stack into a tree with a helper method.
+     *
+     * @param sentence
+     * @return
+     */
     public ExpressionTreeNode parse(String sentence) {
         Pattern pattern = Pattern.compile(tokenRegex);
         Matcher matcher = pattern.matcher(sentence);
@@ -20,12 +31,12 @@ public class Parser {
 
         while (matcher.find()) {
             String token = matcher.group();
-            System.out.print(">" + token);
             ExpressionType type = getType(token);
             ExpressionTreeNode node = new ExpressionTreeNode(type);
 
             if (isOperand(type)) {
-                if (type == ExpressionType.SYMBOL) node.value = token;
+                // if (type == ExpressionType.SYMBOL) node.value = token;
+                node.value = token;
                 fullStack.push(node);
             } else {
                 if (type == ExpressionType.RIGHTP) {
@@ -57,6 +68,12 @@ public class Parser {
         return makeTree(fullStack);
     }
 
+    /**
+     * Recursively makes a tree from a stack of nodes.
+     *
+     * @param stack
+     * @return
+     */
     private ExpressionTreeNode makeTree(PureStack<ExpressionTreeNode> stack) {
         if (stack.isEmpty()) return null;
 
